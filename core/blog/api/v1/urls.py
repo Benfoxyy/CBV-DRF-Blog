@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('post/',views.PostApi),
-    path('detail/<int:id>/',views.DetailApi)
+    path('post/<int:id>/',views.PostDetailApi),
 ]
