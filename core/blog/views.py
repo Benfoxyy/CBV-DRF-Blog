@@ -1,22 +1,17 @@
-from django.shortcuts import render
-from django.views.generic import ListView,DetailView
-from django.views.generic.edit import CreateView
-from .models import Post
+from rest_framework.viewsets import ModelViewSet
+from blog.models import Post,Category
+from .serializers import BlogSerializer,CategorySerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter,OrderingFilter
 
-class IndexView(ListView):
+class CategoryViewSet(ModelViewSet):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
+
+class BlogPosts(ModelViewSet):
+    serializer_class = BlogSerializer
     queryset = Post.objects.all()
-    paginate_by = 2
-
-class SingleView(DetailView):
-    model = Post
-
-class CreatePost(CreateView):
-    model = Post
-    fields = ['title','content','category']
-    success_url = '/blog/'
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.status = True
-        return super().form_valid(form)
-    
+    filter_backends = [DjangoFilterBackend,SearchFilter,OrderingFilter]
+    filterset_fields = ['category']
+    search_fields = ['author__first_name','title']
+    ordering_fields = ['created_date']

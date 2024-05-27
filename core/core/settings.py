@@ -24,7 +24,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG' , cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'accounts',
+    'drf_yasg',
     'rest_framework',
-    
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+    'django_filters',
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +61,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,3 +139,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #config my base user model
 AUTH_USER_MODEL = 'accounts.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp4dev'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 25

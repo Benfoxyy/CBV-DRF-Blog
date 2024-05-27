@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
     def create_superuser(self,email,password,**extera_fields):
         extera_fields.setdefault("is_staff", True)
         extera_fields.setdefault("is_superuser", True)
-        extera_fields.setdefault("is_active", True)
+        extera_fields.setdefault("is_verified", True)
 
 
         if extera_fields.get("is_staff") is not True:
@@ -33,12 +33,10 @@ class User(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField(max_length=255,unique=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    # is_verified = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
+    created_date = models.DateField(auto_now_add=True)
     USERNAME_FIELD = "email"
     # REQUIRED_FIELDS = []
-    created_date = models.DateField(auto_now_add=True)
-
     objects = UserManager()
 
     def __str__(self):
@@ -50,7 +48,6 @@ class Profile (models.Model):
     last_name = models.CharField(max_length=250)
     avatar = models.ImageField(blank=True,null=True)
     bio = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.user.email

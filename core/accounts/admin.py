@@ -5,20 +5,20 @@ from .models import User,Profile
 class CustomUserAdmin(UserAdmin):
     model = User
 
-    list_display = ('email','is_superuser','is_active',)
-    list_filter = ("email", "is_staff", "is_active",)
+    list_display = ('email','is_superuser','is_verified',)
+    list_filter = ("email", "is_staff",)
     ordering = ('email',)
     search_fields = ('email',)
 
     fieldsets = (
         ("Authentication", {
             "fields": (
-                'email','password'
+                'email','password',
             ),
         }),
         ("Permission", {
             "fields":(
-                "is_superuser", "is_staff", "is_active",
+                "is_superuser", "is_staff","is_verified",
             ),
         }),
         ("Group Permission", {
@@ -37,7 +37,7 @@ class CustomUserAdmin(UserAdmin):
         ("Form", {
             "classes": ("wide",),
             "fields": (
-                "email", "password1", "password2", "is_staff",
+                "email", "password1", "password2", "is_staff","is_verified",
                 "is_active","is_superuser",
             )}
         ),
