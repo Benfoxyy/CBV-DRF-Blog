@@ -12,6 +12,7 @@ services:
     environment:
       - SECRET_KEY=test
       - DEBUG=True
+
   smtp4dev:
       image: rnwood/smtp4dev:v3
       restart: always
