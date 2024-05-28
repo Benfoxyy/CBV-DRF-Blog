@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'drf_yasg',
     'rest_framework',
-    'rest_framework.authtoken',
+    # 'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'django_filters',
 
@@ -131,7 +131,7 @@ STATICFILES_DIR = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_ROOT = BASE_DIR/'media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -142,9 +142,9 @@ AUTH_USER_MODEL = 'accounts.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ]
 }
