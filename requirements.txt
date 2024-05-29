@@ -1,8 +1,18 @@
+# For build a website
 django>3.2,<3.3
+# Have connection between environment and site
 python-decouple
+# setting up restframework
 djangorestframework==3.14
 djangorestframework-simplejwt
 django-filter==2.4
+# Swagger
 drf-yasg[validation]
+# Sending html form email
 django-mail-templated
+# Show images
 Pillow
+# Formatting code
+black
+# Analize code
+flake8-django
