@@ -10,7 +10,7 @@ urlpatterns = [
     # my profile
     path("user/me/", views.GetMe.as_view(), name="me"),
     # get other users profile
-    path('user/<str:username>/',views.GetUser.as_view(), name="get-user"),
+    path("user/<str:username>/", views.GetUser.as_view(), name="get-user"),
     # create jwt token
     path(
         "jwt/create/",

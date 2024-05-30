@@ -75,7 +75,8 @@ class ResendToken(generics.GenericAPIView):
     def get_tokens_for_user(self, user):
         refresh = RefreshToken.for_user(user)
         return str(refresh.access_token)
-    
+
+
 # see other users profile
 class GetUser(generics.RetrieveAPIView):
     queryset = Profile.objects.all()
@@ -83,7 +84,9 @@ class GetUser(generics.RetrieveAPIView):
     lookup_field = "username"
 
     def get(self, request, username, *args, **kwargs):
-        queryset = self.get_queryset().get(user__username=username,user__is_verified=True)
+        queryset = self.get_queryset().get(
+            user__username=username, user__is_verified=True
+        )
         serializer = GetUserSerializer(queryset)
         return Response(serializer.data)
 
@@ -98,6 +101,7 @@ class GetMe(generics.RetrieveUpdateAPIView):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset, user=self.request.user)
         return obj
+
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
