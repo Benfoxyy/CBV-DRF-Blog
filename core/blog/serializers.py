@@ -45,9 +45,8 @@ class BlogSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data["author"] = Profile.objects.get(
-            user__id=self.context.get("request").user.id
+            user__username=self.context.get("request").user.username
         )
-        print(validated_data["author"])
         return super().create(validated_data)
 
     def get_abs_url(self, obj):

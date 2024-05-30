@@ -8,7 +8,9 @@ urlpatterns = [
         "registration/", views.RegistrationApi.as_view(), name="registration"
     ),
     # my profile
-    path("users/me/", views.GetMe.as_view(), name="me"),
+    path("user/me/", views.GetMe.as_view(), name="me"),
+    # get other users profile
+    path('user/<str:username>/',views.GetUser.as_view(), name="get-user"),
     # create jwt token
     path(
         "jwt/create/",

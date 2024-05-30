@@ -11,7 +11,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "password", "pass_conf"]
+        fields = ["email", "username", "password", "pass_conf"]
 
     def validate(self, attrs):
         try:
@@ -45,7 +45,7 @@ class ResendTokenSerializer(serializers.Serializer):
 class GetMeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ["id", "user", "first_name", "last_name", "avatar", "bio"]
+        fields = ["id", "user", "avatar", "bio"]
         read_only_fields = ["user"]
 
 
@@ -56,7 +56,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             raise serializers.ValidationError(
                 {"detail": "User is not verifide yet"}
             )
-        data.update({"user": self.user.email})
+        data.update({"email": self.user.email})
+        data.update({"username": self.user.username})
         data.update({"id": self.user.id})
         return data
 
@@ -97,3 +98,9 @@ class ResetPasswordConfSerializer(serializers.Serializer):
                 {"error": "password does not match"}
             )
         return super().validate(attrs)
+
+
+class GetUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id', 'user', 'bio', 'avatar',]

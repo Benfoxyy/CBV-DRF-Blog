@@ -35,6 +35,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
+    username = models.CharField(max_length=200,unique=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
@@ -48,15 +49,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=250)
-    last_name = models.CharField(max_length=250)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='profile')
     avatar = models.ImageField(blank=True, null=True)
     bio = models.TextField()
 
     def __str__(self):
-        return self.user.email
-
+        return self.user.username
 
 @receiver(post_save, sender=User)
 def profile_saver(sender, instance, created, **kwargs):

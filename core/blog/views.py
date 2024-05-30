@@ -15,5 +15,8 @@ class BlogPosts(ModelViewSet):
     queryset = Post.objects.all()
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ["category"]
-    search_fields = ["author__first_name", "title"]
+    search_fields = ["author__username", "title"]
     ordering_fields = ["created_date"]
+
+
+# class FollowerPosts()

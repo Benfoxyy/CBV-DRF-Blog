@@ -16,7 +16,10 @@ class CustomUserAdmin(UserAdmin):
         "is_staff",
     )
     ordering = ("email",)
-    search_fields = ("email",)
+    search_fields = (
+        "email",
+        "username",
+    )
 
     fieldsets = (
         (
@@ -24,6 +27,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "email",
+                    "username",
                     "password",
                 ),
             },
@@ -62,6 +66,7 @@ class CustomUserAdmin(UserAdmin):
                 "classes": ("wide",),
                 "fields": (
                     "email",
+                    "username",
                     "password1",
                     "password2",
                     "is_staff",
