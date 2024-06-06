@@ -5,6 +5,7 @@ from datetime import datetime
 from accounts.models import User
 
 
+# Create a user for use it in tests
 @pytest.fixture
 def common_user():
     user = User.objects.create_user(
@@ -16,6 +17,7 @@ def common_user():
     return user
 
 
+# Blog tests
 @pytest.mark.django_db
 class TestPostApi:
     client = APIClient()
