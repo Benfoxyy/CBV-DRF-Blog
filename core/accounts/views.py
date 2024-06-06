@@ -111,9 +111,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 class Verification(APIView):
     def get(self, request, token, *args, **kwargs):
         try:
-            info = jwt.decode(
-                token, config("SECRET_KEY"), algorithms=["HS256"]
-            )
+            info = jwt.decode(token, config("SECRET_KEY"), algorithms=["HS256"])
         except ExpiredSignatureError:
             return Response(
                 {"error": "token has been expired"},
@@ -197,9 +195,7 @@ class ResetPasswordConf(generics.GenericAPIView):
 
     def get(self, request, token, *args, **kwargs):
         try:
-            info = jwt.decode(
-                token, config("SECRET_KEY"), algorithms=["HS256"]
-            )
+            info = jwt.decode(token, config("SECRET_KEY"), algorithms=["HS256"])
         except ExpiredSignatureError:
             return Response(
                 {"error": "token has been expired"},

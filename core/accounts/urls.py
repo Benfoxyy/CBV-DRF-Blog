@@ -4,9 +4,7 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView
 
 urlpatterns = [
     # user registration
-    path(
-        "registration/", views.RegistrationApi.as_view(), name="registration"
-    ),
+    path("registration/", views.RegistrationApi.as_view(), name="registration"),
     # my profile
     path("user/me/", views.GetMe.as_view(), name="me"),
     # get other users profile
@@ -26,9 +24,7 @@ urlpatterns = [
     # Resend verification token
     path("resend/", views.ResendToken.as_view(), name="resend"),
     # change password
-    path(
-        "password/change/", views.ChangePassword.as_view(), name="change-pass"
-    ),
+    path("password/change/", views.ChangePassword.as_view(), name="change-pass"),
     # reset password
     path("password/reset/", views.ResetPassword.as_view(), name="reset-pass"),
     # reset password confirmation email

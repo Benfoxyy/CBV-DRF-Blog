@@ -9,6 +9,6 @@ exclude =
     .env,
     settings.py,
     tests.py,
-
+    ./accounts/migrations/,
 ignore =
     E501,

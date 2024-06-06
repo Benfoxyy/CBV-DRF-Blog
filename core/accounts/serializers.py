@@ -19,9 +19,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         except exceptions.ValidationError as e:
             raise serializers.ValidationError(list(e.messages))
         if attrs.get("password") != attrs.get("pass_conf"):
-            raise serializers.ValidationError(
-                {"password": "passwords does not match"}
-            )
+            raise serializers.ValidationError({"password": "passwords does not match"})
         return super().validate(attrs)
 
     def create(self, validated_data):
@@ -36,9 +34,7 @@ class ResendTokenSerializer(serializers.Serializer):
         user_obj = get_object_or_404(User, email=attrs.get("email"))
         attrs["user"] = user_obj
         if user_obj.is_verified:
-            raise serializers.ValidationError(
-                {"user": "user is already verified"}
-            )
+            raise serializers.ValidationError({"user": "user is already verified"})
         return super().validate(attrs)
 
 
@@ -53,9 +49,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super(CustomTokenObtainPairSerializer, self).validate(attrs)
         if not self.user.is_verified:
-            raise serializers.ValidationError(
-                {"detail": "User is not verifide yet"}
-            )
+            raise serializers.ValidationError({"detail": "User is not verifide yet"})
         data.update({"email": self.user.email})
         data.update({"username": self.user.username})
         data.update({"id": self.user.id})
@@ -94,9 +88,7 @@ class ResetPasswordConfSerializer(serializers.Serializer):
         except exceptions.ValidationError as e:
             raise serializers.ValidationError(list(e.messages))
         if attrs.get("new_password") != attrs.get("new_password_conf"):
-            raise serializers.ValidationError(
-                {"error": "password does not match"}
-            )
+            raise serializers.ValidationError({"error": "password does not match"})
         return super().validate(attrs)
 
 

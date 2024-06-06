@@ -49,9 +49,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="profile"
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="profile")
     avatar = models.ImageField(blank=True, null=True)
     bio = models.TextField()
 

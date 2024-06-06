@@ -11,9 +11,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class BlogSerializer(serializers.ModelSerializer):
     snippet_text = serializers.ReadOnlyField(source="snippet")
-    absolute_url = serializers.SerializerMethodField(
-        method_name="get_abs_url"
-    )
+    absolute_url = serializers.SerializerMethodField(method_name="get_abs_url")
 
     class Meta:
         model = Post
@@ -38,9 +36,7 @@ class BlogSerializer(serializers.ModelSerializer):
             rep.pop("absolute_url", None)
         else:
             rep.pop("content", None)
-        rep["category"] = CategorySerializer(
-            instance.category
-        ).data  # .get('name')
+        rep["category"] = CategorySerializer(instance.category).data  # .get('name')
         return rep
 
     def create(self, validated_data):

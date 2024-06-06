@@ -16,3 +16,6 @@ Pillow
 black
 # Analize code
 flake8-django
+# Testing code
+pytest
+pytest-django
