@@ -19,3 +19,5 @@ flake8-django
 # Testing code
 pytest
 pytest-django
+# Make random posts for project
+Faker
