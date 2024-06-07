@@ -21,3 +21,5 @@ pytest
 pytest-django
 # Make random posts for project
 Faker
+# Give access to get data from frontend
+django-cors-headers

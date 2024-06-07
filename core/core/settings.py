@@ -42,15 +42,16 @@ INSTALLED_APPS = [
     "accounts",
     "drf_yasg",
     "rest_framework",
-    # 'rest_framework.authtoken',
     "rest_framework_simplejwt",
     "django_filters",
     "mail_templated",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -149,9 +150,13 @@ REST_FRAMEWORK = {
     ]
 }
 
+# smtp4dev settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_USE_TLS = False
 EMAIL_HOST = "smtp4dev"
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_PORT = 25
+
+# Cors header settings
+CORS_ALLOW_ALL_ORIGINS = True
