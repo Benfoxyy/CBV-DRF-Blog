@@ -23,3 +23,7 @@ pytest-django
 Faker
 # Give access to get data from frontend
 django-cors-headers
+# Background processing and cache
+celery
+redis
+django-redis
