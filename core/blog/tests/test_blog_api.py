@@ -23,12 +23,12 @@ class TestPostApi:
     client = APIClient()
 
     def test_get_post_response_200(self):
-        url = reverse("blog:post-list")
+        url = reverse("blog:posts-list")
         response = self.client.get(url)
         assert response.status_code == 200
 
     def test_create_post_response_401(self):
-        url = reverse("blog:post-list")
+        url = reverse("blog:posts-list")
         data = {"title": "test", "content": "test", "created_date": datetime.now()}
         response = self.client.post(url, data)
         assert response.status_code == 401
@@ -40,8 +40,8 @@ class TestPostApi:
             "content": "test",
             "created_date": datetime.now(),
         }
-        post_list_url = reverse("blog:post-list")
-        single_post_url = reverse("blog:post-detail", kwargs={"pk": data.get("pk")})
+        post_list_url = reverse("blog:posts-list")
+        single_post_url = reverse("blog:posts-detail", kwargs={"pk": data.get("pk")})
         user = common_user
         self.client.force_login(user=user)
         post_list_response = self.client.post(post_list_url, data)
@@ -59,7 +59,7 @@ class TestPostApi:
         assert single_post_delete_response.status_code == 204
 
     def test_create_invalid_post_response_400(self, common_user):
-        url = reverse("blog:post-list")
+        url = reverse("blog:posts-list")
         data = {}
         user = common_user
         self.client.force_login(user=user)
