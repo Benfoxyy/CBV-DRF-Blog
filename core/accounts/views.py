@@ -13,7 +13,6 @@ from .models import Profile, User
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.views import TokenObtainPairView
-from mail_templated import EmailMessage
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 import jwt
@@ -42,7 +41,7 @@ class RegistrationApi(generics.GenericAPIView):
         serializer.save()
         user_obj = get_object_or_404(User, email=email)
         token = self.get_tokens_for_user(user=user_obj)
-        SendEmail.delay(token=token,email=email)
+        SendEmail.delay(token=token, email=email)
         return Response({"success": "email successfully sent"})
 
     def get_tokens_for_user(self, user):
@@ -60,7 +59,7 @@ class ResendToken(generics.GenericAPIView):
         email = serializer.validated_data["email"]
         user_obj = serializer.validated_data["user"]
         token = self.get_tokens_for_user(user=user_obj)
-        SendEmail.delay(token=token,email=email)
+        SendEmail.delay(token=token, email=email)
         return Response({"success": "email successfully sent"})
 
     def get_tokens_for_user(self, user):
@@ -74,7 +73,7 @@ class GetUser(generics.RetrieveAPIView):
     serializer_class = GetUserSerializer
     lookup_field = "username"
 
-    @method_decorator(cache_page(60*2))
+    @method_decorator(cache_page(60 * 2))
     def get(self, request, username, *args, **kwargs):
         queryset = self.get_queryset().get(
             user__username=username, user__is_verified=True
@@ -167,7 +166,7 @@ class ResetPassword(generics.GenericAPIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         token = self.get_tokens_for_user(user=user_obj)
-        SendEmail.delay(token=token,email=user_obj.email)
+        SendEmail.delay(token=token, email=user_obj.email)
         return Response({"success": "reset password email sent successfully"})
 
     def get_tokens_for_user(self, user):

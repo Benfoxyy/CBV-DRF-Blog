@@ -27,3 +27,5 @@ django-cors-headers
 celery
 redis
 django-redis
+# Setup project for deployment
+gunicorn
