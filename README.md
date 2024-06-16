@@ -9,7 +9,7 @@
 </p>
 
 ### Project endpoints
-![Screenshot 2024-05-30 110729](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/91d79d8b-06c0-46c4-b58e-defa9ebaa92b)
+![Screenshot 2024-06-09 121434](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/e5615902-4584-41ec-b746-a1a5d3366bbe)
 
 ### Authentication method
 - Jason Web Token ( JWT )

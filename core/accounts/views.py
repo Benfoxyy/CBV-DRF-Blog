@@ -13,9 +13,7 @@ from .models import Profile, User
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 from rest_framework_simplejwt.views import TokenObtainPairView
-from mail_templated import EmailMessage
 from rest_framework_simplejwt.tokens import RefreshToken
-from .utils import EmailThread
 from rest_framework.views import APIView
 import jwt
 from jwt.exceptions import (
@@ -26,6 +24,10 @@ from jwt.exceptions import (
 from rest_framework.response import Response
 from decouple import config
 from rest_framework import status
+from .task import SendEmail
+from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 # registraion api view
@@ -39,13 +41,7 @@ class RegistrationApi(generics.GenericAPIView):
         serializer.save()
         user_obj = get_object_or_404(User, email=email)
         token = self.get_tokens_for_user(user=user_obj)
-        email_obj = EmailMessage(
-            "email/verify.tpl",
-            {"token": token},
-            "benxfoxy@gmail.com",
-            to=[email],
-        )
-        EmailThread(email_obj).start()
+        SendEmail.delay(token=token, email=email)
         return Response({"success": "email successfully sent"})
 
     def get_tokens_for_user(self, user):
@@ -63,13 +59,7 @@ class ResendToken(generics.GenericAPIView):
         email = serializer.validated_data["email"]
         user_obj = serializer.validated_data["user"]
         token = self.get_tokens_for_user(user=user_obj)
-        email_obj = EmailMessage(
-            "email/verify.tpl",
-            {"token": token},
-            "benxfoxy@gmail.com",
-            to=[email],
-        )
-        EmailThread(email_obj).start()
+        SendEmail.delay(token=token, email=email)
         return Response({"success": "email successfully sent"})
 
     def get_tokens_for_user(self, user):
@@ -83,6 +73,7 @@ class GetUser(generics.RetrieveAPIView):
     serializer_class = GetUserSerializer
     lookup_field = "username"
 
+    @method_decorator(cache_page(60 * 2))
     def get(self, request, username, *args, **kwargs):
         queryset = self.get_queryset().get(
             user__username=username, user__is_verified=True
@@ -111,7 +102,7 @@ class CustomTokenObtainPairView(TokenObtainPairView):
 class Verification(APIView):
     def get(self, request, token, *args, **kwargs):
         try:
-            info = jwt.decode(token, config("SECRET_KEY"), algorithms=["HS256"])
+            info = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         except ExpiredSignatureError:
             return Response(
                 {"error": "token has been expired"},
@@ -175,13 +166,7 @@ class ResetPassword(generics.GenericAPIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         token = self.get_tokens_for_user(user=user_obj)
-        email_obj = EmailMessage(
-            "email/resetverify.tpl",
-            {"token": token},
-            "benxfoxy@gmail.com",
-            to=[user_obj.email],
-        )
-        EmailThread(email_obj).start()
+        SendEmail.delay(token=token, email=user_obj.email)
         return Response({"success": "reset password email sent successfully"})
 
     def get_tokens_for_user(self, user):

@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = "agaegaegagrbagr"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", cast=bool)
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -132,7 +132,7 @@ STATIC_ROOT = BASE_DIR / "static"
 STATICFILES_DIR = [BASE_DIR / "staticfiles"]
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media/"
+MEDIA_ROOT = BASE_DIR / "media"
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -145,7 +145,6 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
-        # 'rest_framework.authentication.TokenAuthentication',
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ]
 }
@@ -160,3 +159,17 @@ EMAIL_PORT = 25
 
 # Cors header settings
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Celery config
+CELERY_BROKER_URL = "redis://redis:6379/1"
+
+# Cahching config
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    }
+}

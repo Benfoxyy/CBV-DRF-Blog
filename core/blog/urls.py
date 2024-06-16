@@ -4,5 +4,6 @@ from . import views
 app_name = "blog"
 
 router = DefaultRouter()
-router.register("blog", views.BlogPosts)
+router.register("posts", views.BlogPosts, basename="blog")
+router.register("category", views.CategoryViewSet, basename="category")
 urlpatterns = router.urls
