@@ -29,3 +29,5 @@ redis
 django-redis
 # Setup project for deployment
 gunicorn
+# Postgresql
+psycopg2-binary
