@@ -1,29 +1,32 @@
-<h1 align="center">Django Blog</h1>
-<h3 align="center">Class base view restframework with GenericView classes project</h3>
+<h1 align="center">Django Blog With Rest Framework</h1>
+<h3 align="center">You can post an article to blog and other people can see and put comment under your post</h3>
 <p align="center">
 <a href="https://www.python.org" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a>
-<a href="https://www.djangoproject.com/" target="_blank"> <img src="https://static.djangoproject.com/img/logos/django-logo-negative.svg" alt="django" width="40" height="40"/> </a>
+<a href="https://www.djangoproject.com/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/django.svg" alt="django" width="40" height="40"/> </a>
+<a href="https://www.docker.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" alt="docker" width="40" height="40"/> </a>
 <a href="https://www.django-rest-framework.org/" target="_blank"> <img src="https://www.django-rest-framework.org/img/logo.png" alt="restframework" width="90" height="40"/> </a>
-<a href="https://www.sqlite.org/" target="_blank"> <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" alt="sqlite" width="40" height="40"/> </a>
+<a href="https://www.postgresql.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" alt="postgresql" width="40" height="40"/> </a>
 <a href="https://jwt.io/" target="_blank"> <img src="https://jwt.io/img/icon.svg" alt="jwt" width="40" height="40"/> </a>
+<a href="https://swagger.io/" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/354420/swagger.svg" alt="swagger" width="40" height="40"/> </a>
+<a href="https://www.gunicorn.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gunicorn/gunicorn-icon.svg" alt="gunicorn" width="40" height="40"/> </a>
+<a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/nginx/nginx-icon.svg" alt="nginx" width="40" height="40"/> </a>
+
 </p>
 
 ### Project endpoints
-![Screenshot 2024-06-09 121434](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/e5615902-4584-41ec-b746-a1a5d3366bbe)
+![accounts](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/b4da6a0e-f936-43aa-948e-a2943a3e669f)
 
-### Authentication method
-- Jason Web Token ( JWT )
+<hr>
+
+![blog](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/6a0725e6-2ef6-486b-9593-7c11f30af2ed)
 
 ### General features
 - Class Based View
 - Django RestFramewok
 - Generic View
 - User Authentication
-
-### Blog features
-- Create
-- Edit
-- Delete
+- Test processing
+- Dockrized
 
 ### Accounts features
 - Registeraton
@@ -32,7 +35,36 @@
 - Validate JWT
 - Change Password
 - Reset Password
-- Validate Email
+- Email Validations
+
+### Blog features
+- Create
+- Retrieve
+- Edit
+- Delete
+
+### Commenting features
+- Create
+- Retrieve
+- Edit
+- Delete
+
+### Authentication method
+- Jason Web Token ( JWT )
+
+### DB
+PostgreSQL
+
+### Web serving methods
+- Gunicorn
+- Nginx
+
+### Test method
+Pytest
+
+### Reformatting method
+- flake8
+- black
 
 ### Setup
 To get the repository you need to run this command in git terminal
@@ -63,7 +95,15 @@ Now, to apply this migrations run following command
 python manage.py migrate
 ```
 
-### Option
+### Run server
+The project is base on docker so lets start <a href='https://docs.docker.com/engine/install/'>docker</a> and using the app
+```bash
+docker-compose -f docker-compose-stage.yml up -d
+```
+
+Whene server is up and running, go to a browser and type http://127.0.0.1:80
+
+### Access to admin panel
 For editing or manage the database, you shulde be superuser and have superuser permission. So lets create superuser
 ```bash
 python manage.py createsuperuser
@@ -72,19 +112,19 @@ python manage.py createsuperuser
 - Password
 - Password confirmation
 
-### Run server
-And finally lets start server and see and using the app
+Thene you can now go in admin panel with http://127.0.0.1:80/admin/
+
+### See all endpoints
+For see the all of apis and test you need to go to swagger page with this http://127.0.0.1:80/swagger/
+
+### Test your project
+For testing your project with pytest type this in command line
 ```bash
-python manage.py runserver
+pytest
 ```
 
-Whene server is up and running, go to a browser and type http://127.0.0.1:8000
-
-### See all apis
-For see the all of apis and test you need to go to swagger page with this http://127.0.0.1:8000/swagger/
-
 ### Database shema
-![drawSQL-image-export-2024-05-30](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/66f0eb3c-c5cc-4ff8-93f7-1e962253c96d)
+![drawSQL-image-export-2024-06-29](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/bbaae92d-edec-490b-8a43-9405828606d3)
 
 <hr>
 

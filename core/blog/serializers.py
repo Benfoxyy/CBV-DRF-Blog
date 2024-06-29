@@ -1,6 +1,19 @@
 from rest_framework import serializers
-from .models import Post, Category
+from .models import Post, Category, Comments
 from accounts.models import Profile
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comments
+        fields = ['id','author', 'post', 'content']
+        read_only_fields = ['author','post']
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        validated_data["author"] = Profile.objects.get(user__username=request.user.username)
+        validated_data['post']=Post.objects.get(pk=request.parser_context.get("kwargs").get("pk"))
+        return super().create(validated_data)
 
 
 class CategorySerializer(serializers.ModelSerializer):
