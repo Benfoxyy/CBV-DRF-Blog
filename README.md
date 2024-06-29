@@ -42,31 +42,36 @@ git clone https://github.com/Benfoxyy/CBV-DRF-Blog.git
 
 ### Getting ready
 Create an environment for install all dependencies with this command
+
+### Run server
+The project is base on docker so lets first start <a href='https://docs.docker.com/engine/install/'>Docker</a>
 ```bash
-python -m venv venv
+docker-compose -f docker-compose-stage.yml up -d
 ```
 
-Install all project dependencies with this command
+Once you have installed django and other packages, go to the cloned repo directory and run fallowing command
 ```bash
-pip install -r rquirements.txt
-```
-
-Once you have installed django and other packages, go to the cloned repo directory and ru fallowing command
-```bash
-python manage.py makemigrations
+docker-compose -f docker-compose-stage.yml exec backend sh -c "python manage.py makemigrations"
 ```
 
 This command will create all migrations file to database
 
 Now, to apply this migrations run following command
 ```bash
-python manage.py migrate
+docker-compose -f docker-compose-stage.yml exec backend sh -c "python manage.py migrate"
 ```
 
+<<<<<<< Updated upstream
 ### Option
+=======
+### IT DONE
+Now you can go to a browser and type http://127.0.0.1:80 and see the resault!
+
+### Access to admin panel
+>>>>>>> Stashed changes
 For editing or manage the database, you shulde be superuser and have superuser permission. So lets create superuser
 ```bash
-python manage.py createsuperuser
+docker-compose -f docker-compose-stage.yml exec backend sh -c "python manage.py createsuperuser"
 ```
 - Email
 - Password
@@ -75,7 +80,11 @@ python manage.py createsuperuser
 ### Run server
 And finally lets start server and see and using the app
 ```bash
+<<<<<<< Updated upstream
 python manage.py runserver
+=======
+docker-compose -f docker-compose-stage.yml exec backend sh -c "pytest"
+>>>>>>> Stashed changes
 ```
 
 Whene server is up and running, go to a browser and type http://127.0.0.1:8000
