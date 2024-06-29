@@ -7,23 +7,30 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('accounts', '0006_remove_user_followers'),
-        ('blog', '0003_auto_20240624_1159'),
+        ("accounts", "0006_remove_user_followers"),
+        ("blog", "0003_auto_20240624_1159"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='comments',
-            name='post',
+            model_name="comments",
+            name="post",
         ),
         migrations.AddField(
-            model_name='post',
-            name='comment',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='blog.comments'),
+            model_name="post",
+            name="comment",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="blog.comments",
+            ),
         ),
         migrations.AlterField(
-            model_name='comments',
-            name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accounts.profile'),
+            model_name="comments",
+            name="author",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="accounts.profile"
+            ),
         ),
     ]

@@ -5,7 +5,7 @@ from . import views
 app_name = "blog"
 
 urlpatterns = [
-    path("comments/<int:pk>/",views.CommentViewSet.as_view(),name='comments'),
+    path("comments/<int:pk>/", views.CommentViewSet.as_view(), name="comments"),
 ]
 
 router = DefaultRouter()
