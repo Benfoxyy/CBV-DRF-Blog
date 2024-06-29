@@ -1,13 +1,6 @@
 from django.db import models
 from accounts.models import Profile
 
-class Comments(models.Model):
-    author = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
-    post = models.ForeignKey("Post", on_delete=models.SET_NULL, null=True)
-    content = models.CharField(max_length=250)
-
-    def __str__(self):
-        return f"{self.post} - {self.content}"
 
 class Comments(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
@@ -16,6 +9,16 @@ class Comments(models.Model):
 
     def __str__(self):
         return f"{self.post} - {self.content}"
+
+
+class Comments(models.Model):
+    author = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+    post = models.ForeignKey("Post", on_delete=models.SET_NULL, null=True)
+    content = models.CharField(max_length=250)
+
+    def __str__(self):
+        return f"{self.post} - {self.content}"
+
 
 class Post(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="posts")

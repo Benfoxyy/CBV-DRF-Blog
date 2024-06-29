@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Post, Category, Comments
 from accounts.models import Profile
 
+
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comments
@@ -17,6 +18,7 @@ class CommentSerializer(serializers.ModelSerializer):
             pk=request.parser_context.get("kwargs").get("pk")
         )
         return super().create(validated_data)
+
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
