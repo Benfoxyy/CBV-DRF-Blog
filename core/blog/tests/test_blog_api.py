@@ -57,7 +57,7 @@ class TestPostApi:
         comments_post_response = self.client.post(comments_url, comment_data)
         comments_get_response = self.client.get(comments_url)
         comments_put_response = self.client.put(comments_url, comment_data.update({"content": "put"}))
-        comments_patch_response = self.client.put(comments_url, comment_data.update({"content": "patch"}))
+        comments_patch_response = self.client.patch(comments_url, comment_data.update({"content": "patch"}))
         single_post_delete_response = self.client.delete(single_post_url)
         assert post_list_response.status_code == 201
         assert single_post_response.status_code == 200
