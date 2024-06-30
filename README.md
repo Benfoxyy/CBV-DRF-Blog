@@ -38,16 +38,15 @@
 - Email Validations
 
 ### Blog features
+- List
 - Create
 - Retrieve
 - Edit
 - Delete
 
 ### Commenting features
+- List
 - Create
-- Retrieve
-- Edit
-- Delete
 
 ### Authentication method
 - Jason Web Token ( JWT )
@@ -81,14 +80,14 @@ docker-compose -f docker-compose-stage.yml up -d
 
 Once you have installed django and other packages, go to the cloned repo directory and ru fallowing command
 ```bash
-docker-compose -f docker-compose-stage.yml exec sh -c "python manage.py makemigrations"
+docker-compose exec sh -c "python manage.py makemigrations"
 ```
 
 This command will create all migrations file to database
 
 Now, to apply this migrations run following command
 ```bash
-docker-compose -f docker-compose-stage.yml exec sh -c "python manage.py migrate"
+docker-compose exec sh -c "python manage.py migrate"
 ```
 
 Now you can go to a browser and type http://127.0.0.1:80 and see the resault!
@@ -98,7 +97,7 @@ Now you can go to a browser and type http://127.0.0.1:80 and see the resault!
 ### Access to admin panel
 For editing or manage the database, you shulde be superuser and have superuser permission. So lets create superuser
 ```bash
-docker-compose -f docker-compose-stage.yml exec sh -c "python manage.py createsuperuser"
+docker-compose exec sh -c "python manage.py createsuperuser"
 ```
 - Email
 - Password
@@ -112,7 +111,7 @@ For see the all of apis and test you need to go to swagger page with this http:/
 ### Test your project
 For testing your project with pytest type this in command line
 ```bash
-docker-compose -f docker-compose-stage.yml exec sh -c "pytest"
+docker-compose exec sh -c "pytest"
 ```
 
 ### Database shema

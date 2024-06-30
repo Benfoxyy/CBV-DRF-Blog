@@ -7,12 +7,10 @@ from django.views.decorators.cache import cache_page
 from .paginations import CustomPagination
 from .serializers import BlogSerializer, CategorySerializer, CommentSerializer
 from blog.models import Post, Category, Comments
-from .serializers import BlogSerializer, CategorySerializer, CommentSerializer
-from blog.models import Post, Category, Comments
 from rest_framework import generics
 
 
-# @method_decorator(cache_page(60 * 2), name="dispatch")
+@method_decorator(cache_page(60 * 2), name="dispatch")
 class CommentViewSet(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
 
