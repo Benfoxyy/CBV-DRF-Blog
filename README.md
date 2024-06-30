@@ -73,40 +73,32 @@ git clone https://github.com/Benfoxyy/CBV-DRF-Blog.git
 ```
 
 ### Getting ready
-Create an environment for install all dependencies with this command
-```bash
-python -m venv venv
-```
 
-Install all project dependencies with this command
+The project is base on docker so lets start <a href='https://docs.docker.com/engine/install/'>docker</a> and using the app
 ```bash
-pip install -r rquirements.txt
+docker-compose -f docker-compose-stage.yml up -d
 ```
 
 Once you have installed django and other packages, go to the cloned repo directory and ru fallowing command
 ```bash
-python manage.py makemigrations
+docker-compose -f docker-compose-stage.yml exec sh -c "python manage.py makemigrations"
 ```
 
 This command will create all migrations file to database
 
 Now, to apply this migrations run following command
 ```bash
-python manage.py migrate
+docker-compose -f docker-compose-stage.yml exec sh -c "python manage.py migrate"
 ```
 
-### Run server
-The project is base on docker so lets start <a href='https://docs.docker.com/engine/install/'>docker</a> and using the app
-```bash
-docker-compose -f docker-compose-stage.yml up -d
-```
+Now you can go to a browser and type http://127.0.0.1:80 and see the resault!
 
-Whene server is up and running, go to a browser and type http://127.0.0.1:80
+<hr>
 
 ### Access to admin panel
 For editing or manage the database, you shulde be superuser and have superuser permission. So lets create superuser
 ```bash
-python manage.py createsuperuser
+docker-compose -f docker-compose-stage.yml exec sh -c "python manage.py createsuperuser"
 ```
 - Email
 - Password
@@ -120,11 +112,11 @@ For see the all of apis and test you need to go to swagger page with this http:/
 ### Test your project
 For testing your project with pytest type this in command line
 ```bash
-pytest
+docker-compose -f docker-compose-stage.yml exec sh -c "pytest"
 ```
 
 ### Database shema
-![drawSQL-image-export-2024-06-29](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/bbaae92d-edec-490b-8a43-9405828606d3)
+![drawSQL-image-export-2024-06-29 (1)](https://github.com/Benfoxyy/CBV-DRF-Blog/assets/146076866/968caa8c-8e0b-417d-8403-106d68329766)
 
 <hr>
 

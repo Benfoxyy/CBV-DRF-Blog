@@ -12,13 +12,12 @@ from blog.models import Post, Category, Comments
 from rest_framework import generics
 
 
-@method_decorator(cache_page(60 * 2), name="dispatch")
+# @method_decorator(cache_page(60 * 2), name="dispatch")
 class CommentViewSet(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
 
     def get_queryset(self):
         queryset = Comments.objects.all()
-        # param = self.request.query_params.get('pk')
         queryset = queryset.filter(post__id=self.kwargs["pk"])
         return queryset
 
