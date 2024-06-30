@@ -17,4 +17,4 @@ jobs:
     - name: Run the docker-compose
       run: docker-compose -f docker-compose-stage.yml up -d
     - name: Test Project
-      run: docker-compose -f docker-compose-stage.yml exec backend sh -c "pytest"
+      run: docker-compose exec backend sh -c "pytest"
