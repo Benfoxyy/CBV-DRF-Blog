@@ -1,5 +1,7 @@
 # For build a website
 django>3.2,<3.3
+# DB
+psycopg2-binary>=2.9
 # Have connection between environment and site
 python-decouple
 # setting up restframework

@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from faker import Faker
 from accounts.models import User, Profile
-from ...models import Post, Category
+from ...models import Post, Category, Comments
 from random import choice
 
 category_exaples = (
@@ -38,3 +38,9 @@ class Command(BaseCommand):
                 content=self.faker.paragraph(nb_sentences=5),
                 category=Category.objects.get(name=choice(category_exaples)),
             )
+            for _ in range(3):
+                Comments.objects.create(
+                    author = profile,
+                    post = Post.objects.all().last(),
+                    content = self.faker.paragraph(nb_sentences=2)
+                )

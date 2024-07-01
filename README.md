@@ -10,6 +10,7 @@
 <a href="https://swagger.io/" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/354420/swagger.svg" alt="swagger" width="40" height="40"/> </a>
 <a href="https://www.gunicorn.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gunicorn/gunicorn-icon.svg" alt="gunicorn" width="40" height="40"/> </a>
 <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/nginx/nginx-icon.svg" alt="nginx" width="40" height="40"/> </a>
+<a href="https://www.pytest.com" target="_blank" rel="noreferrer"> <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxZW0iIGhlaWdodD0iMWVtIiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHBhdGggZmlsbD0iIzY5Njk2OSIgZD0iTTMxLjUxMiAzMC4zOThoNjEuMzA0YTMuMDA2IDMuMDA2IDAgMCAxIDAgNi4wMTJIMzEuNTEyYTMuMDA3IDMuMDA3IDAgMCAxLTMuMDA0LTMuMDA0YTMuMDEgMy4wMSAwIDAgMSAzLjAwNC0zLjAwOG0wIDAiLz48cGF0aCBmaWxsPSIjMDA5ZmUzIiBkPSJNMzIuMDQ3IDI0LjMySDQ0LjM3djIuODQ0SDMyLjA0N3ptMCAwIi8+PHBhdGggZmlsbD0iI2M3ZDMwMiIgZD0iTTQ4LjE2OCAyNC4zMmgxMi4zMjR2Mi44NDRINDguMTY4em0wIDAiLz48cGF0aCBmaWxsPSIjZjA3ZTE2IiBkPSJNNjQuMDcgMjQuMzJoMTIuMzI4djIuODQ0SDY0LjA3em0wIDAiLz48cGF0aCBmaWxsPSIjZGYyODE1IiBkPSJNNzkuOTEgMjQuMzJoMTIuMzI0djIuODQ0SDc5Ljkxem0wIDE1LjIyaDEyLjMyNHYyMC44MzVINzkuOTF6bTAgMCIvPjxwYXRoIGZpbGw9IiNmMDdlMTYiIGQ9Ik02NC4wNyAzOS41NGgxMi4zNTJ2MzMuODQ3SDY0LjA3em0wIDAiLz48cGF0aCBmaWxsPSIjYzdkMzAyIiBkPSJNNDguMTY4IDM5LjU0aDEyLjMyNHY1MC42OThINDguMTY4em0wIDAiLz48cGF0aCBmaWxsPSIjMDA5ZmUzIiBkPSJNMzIuMDQ3IDM5LjU0SDQ0LjM3djYxLjc5MkgzMi4wNDd6bTAgMCIvPjwvc3ZnPg==" alt="pytest" width="40" height="40"/> </a>
 
 </p>
 
@@ -27,6 +28,7 @@
 - User Authentication
 - Test processing
 - Dockrized
+- Faker
 
 ### Accounts features
 - Registeraton
@@ -75,19 +77,19 @@ git clone https://github.com/Benfoxyy/CBV-DRF-Blog.git
 
 The project is base on docker so lets start <a href='https://docs.docker.com/engine/install/'>docker</a> and using the app
 ```bash
-docker-compose -f docker-compose-stage.yml up -d
+docker-compose -f docker-compose.stage.yml up -d
 ```
 
 Once you have installed django and other packages, go to the cloned repo directory and ru fallowing command
 ```bash
-docker-compose exec sh -c "python manage.py makemigrations"
+docker-compose -f docker-compose.stage.yml exec sh -c "python manage.py makemigrations"
 ```
 
 This command will create all migrations file to database
 
 Now, to apply this migrations run following command
 ```bash
-docker-compose exec sh -c "python manage.py migrate"
+docker-compose -f docker-compose.stage.yml exec sh -c "python manage.py migrate"
 ```
 
 Now you can go to a browser and type http://127.0.0.1:80 and see the resault!
@@ -97,7 +99,7 @@ Now you can go to a browser and type http://127.0.0.1:80 and see the resault!
 ### Access to admin panel
 For editing or manage the database, you shulde be superuser and have superuser permission. So lets create superuser
 ```bash
-docker-compose exec sh -c "python manage.py createsuperuser"
+docker-compose -f docker-compose.stage.yml exec sh -c "python manage.py createsuperuser"
 ```
 - Email
 - Password
@@ -108,10 +110,16 @@ Thene you can now go in admin panel with http://127.0.0.1:80/admin/
 ### See all endpoints
 For see the all of apis and test you need to go to swagger page with this http://127.0.0.1:80/swagger/
 
+### Create random post ( for development )
+For creating some random posts/categorys/comments for make the develop easier use this
+```bash
+docker-compose -f docker-compose.stage.yml exec sh -c "python manage.py random_data"
+```
+
 ### Test your project
 For testing your project with pytest type this in command line
 ```bash
-docker-compose exec sh -c "pytest"
+docker-compose -f docker-compose.stage.yml exec sh -c "pytest"
 ```
 
 ### Database shema
